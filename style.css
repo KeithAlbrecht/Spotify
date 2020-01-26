@@ -1,0 +1,15 @@
+.modal-body {
+    max-height: 100px;
+    overflow: auto;
+  }
+  .modal-body,
+  .modal-body .dropdown {
+    position: static !important;
+  }
+  .modal-body .dropdown-menu {
+    top: 100px;
+    left: 20px;
+  }
+
+  
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SPOTIFY GUESSING GAME</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body style="background-color:black" margin-left: auto; margin-right: auto align-items: center>
+
+  <div class="row" style="padding-left: 10px;">
+    <!-- <div class="col-md-12"-->
+    {% for i in image_urls %}
+    <div class="col-md-4">
+      <div class="thumbnail" align-items: center>
+        <button name={{i[1]}} class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          <img src="{{i[0]}}">
+          <a id="{{i[1]}}"></a>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Make a Prediction: In What Decade Was This Song Released?</h4>
+        </div>
+        <div class="modal-body">
+          <div class="dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+              Select a Decade <span class="caret"></span>
+            </a>
+            <br>
+
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <a href="#">
+                <li onclick="PredictionFunction(this)" id="1950">1950s</li>
+              </a>
+              <a href="#">
+                <li onclick="PredictionFunction(this)" id="1960">1960s</li>
+              </a>
+              <a href="#">
+                <li onclick="PredictionFunction(this)" id="1970">1970s</li>
+              </a>
+              <a href="#">
+                <li onclick="PredictionFunction(this)" id="1980">1980s</li>
+              </a>
+              <a href="#">
+                <li onclick="PredictionFunction(this)" id="1990">1990s</li>
+              </a>
+              <a href="#">
+                <li onclick="PredictionFunction(this)" id="2000">2000s</li>
+              </a>
+              <a href="#">
+                <li onclick="PredictionFunction(this)" id="2010">2010s</li>
+              </a>
+            </ul>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+  <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
