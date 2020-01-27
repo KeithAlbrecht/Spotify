@@ -4,9 +4,10 @@ import pandas as pd
 import numpy as np
 import random
 import pickle
+import json
 
 from flask import Flask, jsonify, render_template
-
+from flask import request
 from sklearn.externals import joblib
 
 app = Flask(__name__)
@@ -70,6 +71,12 @@ def tracks(spotify_track):
     return jsonify(spotify_track)
 
 
+@app.route("/predict", methods=['POST'])
+def PredictionFunction():
+    data_dict = json.loads(request.data.decode('utf-8'))
+    spotify_track=data_dict["key"]
+    print(spotify_track)
+    return 'this is data'
 
 # @app.route("/predict", methods=['GET','POST'])
 # def PredictionFunction():

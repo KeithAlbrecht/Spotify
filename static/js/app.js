@@ -3,8 +3,11 @@ spotify_track = ''
 function PredictionFunction(spotify_track) {
   fetch('/predict', {
     method: 'POST',
-    body: { key: spotify_track }
-  }).then((response) => console.log(response));
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ 'key': spotify_track })
+  }).then((response, d) => console.log(response));
 }
 
 
