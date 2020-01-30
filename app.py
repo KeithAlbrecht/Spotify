@@ -78,55 +78,6 @@ def PredictionFunction():
     print(spotify_track)
     return 'this is data'
 
-# @app.route("/predict", methods=['GET','POST'])
-# def PredictionFunction():
-#     decade = ''
-#     if request.method =='POST':
-#         popularity = float(request.form["popularity"])
-#         acousticness = float(request.form["acousticness"])
-#         danceability = float(request.form["danceability"])
-#         energy = float(request.form["energy"])
-#         instrumentalness = float(request.form["instrumentalness"])
-#         loudness = float(request.form["loudness"])
-#         liveness = float(request.form["liveness"])
-#         speechiness = float(request.form["speechiness"])
-#         tempo = float(request.form["tempo"])
-#         valence = float(request.form["valence"])
-#         duration_ms = float(request.form["duration_ms"])
-#         data = np.array([popularity, acousticness, danceability, energy, instrumentalness, loudness, liveness, speechiness, tempo, valence, duration_ms]).reshape(1,-1)
-#         results = int(spotifyDecade.predict(data)[0])
-#         decade = f"{results:,}"
-#     return render_template("form.html", decade=decade)
-# if __name__ == "__main__":
-#     spotifyDecade = joblib.load('spotify_model.pkl')
-#     app.run()
-
-
-# slacked from Chris...
-# @app.route('/', methods=['GET','POST'])
-# def predict():
-#     genre = ''
-#     if request.method == 'POST':
-#         popularity = float(request.form["popularity"])
-#         acousticness = float(request.form["acousticness"])
-#         danceability = float(request.form["danceability"])
-#         energy = float(request.form["energy"])
-#         instrumentalness = float(request.form["instrumentalness"])
-#         loudness = float(request.form["loudness"])
-#         liveness = float(request.form["liveness"])
-#         speechiness = float(request.form["speechiness"])
-#         tempo = float(request.form["tempo"])
-#         valence = float(request.form["valence"])
-#         duration_ms = float(request.form["duration_ms"])
-#         data = np.array([popularity, acousticness, danceability, energy, instrumentalness, loudness, liveness, speechiness, tempo, valence, duration_ms]).reshape(1,-1)
-#         results = int(clf.predict(data)[0])
-#         genre = f"{results:,}"
-#     return render_template("form.html", genre=genre)
-# if __name__ == "__main__":
-#     clf = joblib.load('model.pkl')
-#     app.run()
-
-
 if __name__ == "__main__":
     app.run()
 
