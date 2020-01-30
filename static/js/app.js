@@ -1,17 +1,15 @@
 spotify_track = ''
 
-function PredictionFunction(spotify_track) {
-  fetch('/predict', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ 'key': spotify_track })
-  }).then((response, d) => console.log(response));
-}
-
-
 d3.selectAll(".btn").on("click", function (d, i) {
   spotify_track = this.name
 })
 
+$('#myModal').on('show.bs.modal', function (event) {
+  window.SONGID = event.relatedTarget.name;
+});
+function PredictionFunction() {
+  d3.json(`/tracks/${window.SONGID}`).then(function(prediction) {     
+    console.log(prediction)
+    //DO SOMETHING WITH THE PREDICTION
+  });    
+}
