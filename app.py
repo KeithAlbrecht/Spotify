@@ -11,6 +11,8 @@ from flask import request
 from sklearn.externals import joblib
 with open('decade_model.pkl', 'rb') as f:
     model = joblib.load(f)
+with open('scaler.pkl', 'rb') as f:
+    scaler = joblib.load(f)
 from sklearn.preprocessing import StandardScaler
 app = Flask(__name__)
 
@@ -62,14 +64,13 @@ def tracks(spotify_track):
     print(track_name)
     print(artist_name)
     
-    X_scaler = StandardScaler().fit(data)
-
     data_scaled = X_scaler.transform(data)
 
     prediction = spotify_joblib_model.predict(data_scaled)    
     print(prediction)
     print(prediction[0])
     return jsonify(int(prediction[0]))
+    
 
 @app.route("/predict", methods=['POST'])
 def PredictionFunction():
