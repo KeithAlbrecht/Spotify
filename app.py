@@ -70,9 +70,9 @@ def tracks(spotify_track):
     prediction = spotify_joblib_model.predict(data_scaled)    
     print(prediction)
     print(prediction[0])
-    return jsonify(int(prediction[0]))
+    # return jsonify(int(prediction[0]))
     return jsonify({"prediction":int(prediction[0]),
-    "actual":int(actual_decade)})
+    "actual":int(float(actual_decade))})
 
 @app.route("/predict", methods=['POST'])
 def PredictionFunction():

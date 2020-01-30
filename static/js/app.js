@@ -8,8 +8,9 @@ $('#myModal').on('show.bs.modal', function (event) {
   window.SONGID = event.relatedTarget.name;
 });
 function PredictionFunction() {
-  d3.json(`/tracks/${window.SONGID}`).then(function(prediction) {     
-    console.log(prediction)
+  d3.json(`/tracks/${window.SONGID}`).then(function(results) {     
+    console.log(results.prediction)
+    console.log(results.actual)
     //DO SOMETHING WITH THE PREDICTION
     var sel = document.getElementById('decade');
     // console.log(sel.options[sel.selectedIndex].value)
@@ -17,7 +18,7 @@ function PredictionFunction() {
     var model = d3.select("#model");
     var actual = d3.select("#actual");
     user.text(`Your guess:${sel.options[sel.selectedIndex].value}`);
-    model.text(`Model's prediction:${prediction}`);
-    actual.text(`Actual:${(actual_decade)}`);
+    model.text(`Model's prediction:${results.prediction}`);
+    actual.text(`Actual:${(results.actual)}`);
   });    
 }
