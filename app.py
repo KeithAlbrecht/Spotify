@@ -52,9 +52,15 @@ def tracks(spotify_track):
     tempo = x.iloc[0, 10]
     valence = x.iloc[0, 11]
     duration_ms = x.iloc[0, 12]
+
+    artist_name = x.iloc[0,1]
+    track_name = x.iloc[0,2]
+
     print(spotify_track)
     data = np.array([popularity, acousticness, danceability, energy, instrumentalness, loudness, speechiness, tempo, valence, duration_ms]).reshape(1,-1)
     print(data)
+    print(track_name)
+    print(artist_name)
     
     X_scaler = StandardScaler().fit(data)
 

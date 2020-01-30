@@ -37,34 +37,19 @@
         </div>
         <div class="modal-body">
           <div class="dropdown">
-            <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
-              Select a Decade <span class="caret"></span>
-            </a>
-            <br>
-
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <a href="#">
-                <li onclick="PredictionFunction(1950)" id="1950">1950s</li>
-              </a>
-              <a href="#">
-                <li onclick="PredictionFunction(1960)" id="1960">1960s</li>
-              </a>
-              <a href="#">
-                <li onclick="PredictionFunction(1970)" id="1970">1970s</li>
-              </a>
-              <a href="#">
-                <li onclick="PredictionFunction(1980)" id="1980">1980s</li>
-              </a>
-              <a href="#">
-                <li onclick="PredictionFunction(1990)" id="1990">1990s</li>
-              </a>
-              <a href="#">
-                <li onclick="PredictionFunction(2000)" id="2000">2000s</li>
-              </a>
-              <a href="#">
-                <li onclick="PredictionFunction(2010)" id="2010">2010s</li>
-              </a>
-            </ul>
+            
+              <select id="decade" onchange="PredictionFunction()">
+                <option disabled selected>Select a Decade 
+                <option disabled>-------------</option>
+                <option>1950s</option>            
+                <option>1960s</option> 
+                <option>1970s</option> 
+                <option>1980s</option> 
+                <option>1990s</option>
+                <option>2000s</option> 
+                <option>2010s</option>    
+              </select>
+              <input type="hidden" id="track" name="track" value="">
           </div>
         </div>
 
