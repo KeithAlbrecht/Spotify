@@ -9,7 +9,9 @@ import json
 from flask import Flask, jsonify, render_template
 from flask import request
 from sklearn.externals import joblib
-
+with open('decade_model.pkl', 'rb') as f:
+    model = joblib.load(f)
+from sklearn.preprocessing import StandardScaler
 app = Flask(__name__)
 
 #################################################
@@ -19,12 +21,11 @@ app = Flask(__name__)
 conn = sqlite3.connect('spotify_db.sqlite')
 db = pd.read_sql('select * from spotify_db', conn)
 
-spotify_joblib_model = joblib.load('spotify_model.sav')
+spotify_joblib_model = joblib.load('decade_model.pkl')
 spotify_db = db.copy()
 image_url_list=list(zip(spotify_db["Image URL"],spotify_db["URI"]))
 @app.route("/")
 def index():
-    
     
     # print(image_url_list)
     # for i in range(10):
@@ -35,41 +36,34 @@ def index():
 
 @app.route("/tracks/<spotify_track>")
 def tracks(spotify_track):
+    print(spotify_db)
+    x = spotify_db[spotify_db["URI"] == spotify_track]
+    print(x)
+    for column in x.columns:
+        print(column)
     
-    sel = [
-        db.spotify_track,
-        db.Popularity,
-        db.Acousticness,
-        db.Danceability,
-        db.Energy,
-        db.Instrumentalness,
-        db.Loudness,
-        db.Speechiness,
-        db.Tempo,
-        db.Valence,
-        db.Duration (ms),
-    ]
-
-    results = db.session.query(*sel).filter(db.spotify_track == spotify_track).all()
-
-    # Create a dictionary entry for each row of metadata information
-    spotify_track = {}
-    for result in results:
-        spotify_track["spotify_track"]=result[0]
-        spotify_track["Popularity"]=result[4]
-        spotify_track["Acousticness"]=result[5]
-        spotify_track["Danceability"]=result[6]
-        spotify_track["Energy"]=result[7]
-        spotify_track["Instrumentalness"]=result[8]
-        spotify_track["Loudness"]=result[9]
-        spotify_track["Speechiness"]=result[10]
-        spotify_track["Tempo"]=result[11]
-        spotify_track["Valence"]=result[12]
-        spotify_track["Duration (ms)"]=result[13]
-
+    popularity = x.iloc[0, 3]
+    acousticness = x.iloc[0, 4]
+    danceability = x.iloc[0, 5]
+    energy = x.iloc[0, 6]
+    instrumentalness = x.iloc[0, 7]
+    loudness = x.iloc[0, 8]
+    speechiness = x.iloc[0, 9]
+    tempo = x.iloc[0, 10]
+    valence = x.iloc[0, 11]
+    duration_ms = x.iloc[0, 12]
     print(spotify_track)
-    return jsonify(spotify_track)
+    data = np.array([popularity, acousticness, danceability, energy, instrumentalness, loudness, speechiness, tempo, valence, duration_ms]).reshape(1,-1)
+    print(data)
+    
+    X_scaler = StandardScaler().fit(data)
 
+    data_scaled = X_scaler.transform(data)
+
+    prediction = spotify_joblib_model.predict(data_scaled)    
+    print(prediction)
+    print(prediction[0])
+    return jsonify(int(prediction[0]))
 
 @app.route("/predict", methods=['POST'])
 def PredictionFunction():
